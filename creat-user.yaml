@@ -1,0 +1,25 @@
+---
+
+- name: Creat User-Login Jan
+  hosts: 127.0.0.1
+  connection: local
+  tasks:
+
+    - name: Add user jan
+      user:
+        name: jan
+        comment: Jan Dostal
+        uid: 1040
+        group: users
+        shell: /bin/bash
+        state: present
+
+    - name: Set authorized key for jan
+      authorized_key:
+        user: jan
+        state: present
+        key: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDO6x5oRj/p0EbN3bIIbdsxFFDDBjTk5zCsDZhCSZUwJlqoBk1aNe4LUJIg6zj56EpEyK1rO/ZipkDmoRuHgYkPW1O+QhQgPB8FrPQZmh4ASi9fxmTyt9GvLUjLjj1qyWzhUpaktAEAjrwOpy51cmRfqf6AlThVlGyuZLmc9BuOrpH0FkwVxwM06naqPnSNZm9tmE3Fq/7WWcsakmm6W8bzzn5jcBv3fVYcMXk3NKWxMZxR+M8PfaoI49Pttp1RgBorI9h9k8qoqeQ6b2dSVZyJCzKs33oNzNDZrMl/dD0OzTDXag+zgapO/H55p/BXw/Zf/hkZ3aGtiKd7baJS84jZ loki@t540p.local"
+
+    - copy:
+        content: 'jan ALL=(ALL) NOPASSWD: ALL'
+        dest: /etc/sudoers.d/jan

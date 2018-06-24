@@ -1,0 +1,31 @@
+---
+
+- name: Install Nginx
+  hosts: 127.0.0.1
+  connection: local
+  tasks:
+
+
+    - rpm_key:
+        state: present
+        key: https://nginx.org/keys/nginx_signing.key
+
+    - name: Add Nginx Repo
+      yum_repository:
+        name: nginx
+        description: nginx repo
+        file: nginx
+        baseurl: http://nginx.org/packages/centos/7/x86_64/
+        gpgcheck: yes
+        enabled: yes
+
+    - name: install nginx
+      package:
+        name: nginx
+        state: present
+
+    - name: enable ngnix
+      service:
+        name: nginx
+        enabled: yes
+        state: started
