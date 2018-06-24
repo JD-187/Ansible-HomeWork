@@ -6,7 +6,8 @@
   tasks:
 
 
-    - rpm_key:
+    - name: install nginx Repo Key 
+      rpm_key:
         state: present
         key: https://nginx.org/keys/nginx_signing.key
 
